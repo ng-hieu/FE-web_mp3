@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup';
 import login from '../reduxToolkit/userSlice'
 import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
 
 function SignIn() {
     const loginSchema = Yup.object().shape({
@@ -19,20 +20,22 @@ function SignIn() {
             <Formik
                 initialValues={{ email: "", password: "" }}
                 validationSchema={loginSchema}
-                onSubmit={(values, { setSubmitting })=>{
+                onSubmit={(values, { setSubmitting }) => {
                     try {
+                        setSubmitting(false);
                         console.log("thử nút submit: ", values)
                         dispatch(login(values)).then((data) => {
                             console.log('data trong form login: ', data)
-                        })
-                    }
-                    catch(err){
+                        }).catch((error) => {
+                            console.log('Lỗi khi lấy dữ liệu:', error);
+                        });
+                    } catch (err) {
                         console.log('ERR SignIn Dispatch: ', err)
                     }
                 }}
             >
                 {({ isSubmitting }) => {
-                    try{
+                    try {
                         return (
                             <Form>
                                 <label>
@@ -44,12 +47,12 @@ function SignIn() {
                                     <Field type="password" name="password" />
                                     <ErrorMessage name="password" component="div" />
                                 </label>
-                                <button type="submit" disabled={isSubmitting}>
+                                <Button type="submit" disabled={isSubmitting}>
                                     Submit
-                                </button>
+                                </Button>
                             </Form>
                         );
-                    } catch (err){
+                    } catch (err) {
                         console.log('ERR login Form: ', err)
                     }
                 }}

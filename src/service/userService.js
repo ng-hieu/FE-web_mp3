@@ -12,6 +12,7 @@ export const login = createAsyncThunk(
         }
         catch (err) {
             console.log('ERR trong login userService: ', err);
+            throw err;
         }
     }
 );
@@ -28,8 +29,8 @@ export const registerUser = createAsyncThunk(
 export const showAllUsers = createAsyncThunk(
     "admin/showAllUsers",
     async () => {
-        const res = await customAPI.get("admin/list_users");
-        return res.data;
+        const response = await customAPI.get("admin/list_users");
+        return response.data;
     });
 
 

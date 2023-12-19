@@ -29,7 +29,7 @@ const userSlice = createSlice({
     }
 })
 export const selectUser = (state) => state.user;
-export const selectUserInfo = (state) => state.user.info;
+// export const selectUserInfo = (state) => state.user.info;
 
 const userReducer = userSlice.reducer
 export default userReducer;
