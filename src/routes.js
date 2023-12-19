@@ -1,15 +1,17 @@
 import { Navigate, useRoutes, useSearchParams } from 'react-router-dom';
 import App from './App';
+import Home from './layouts/Home'
+import SignIn from './page/SignIn';
 
-export default function Router() {
+export default function Routes() {
     return useRoutes([
         {
             path: "/",
-            element: <App />,
+            element: <Home />,
             children: [
                 {
                     path: "/",
-                    element: <App />
+                    element: <SignIn />
                 }
             ]
         }
